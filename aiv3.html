@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="icon" href="https://cors.kbdevs.xyz/https://du11hjcvx0uqb.cloudfront.net/dist/images/favicon-e10d657a73.ico" type="image/x-icon">
+    <link href="https://cors.kbdevs.xyz/https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="aiv3.css"/>
+    <link rel="stylesheet" href="https://cors.kbdevs.xyz/https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+</head>
+<body>
+    <div class="blur-overlay">
+        <div class="password-dialog">
+            <h2>Enter Password</h2>
+            <input type="password" id="password-input" placeholder="Password">
+            <button id="unlock-button">Unlock</button>
+            <div class="password-error">Incorrect password</div>
+        </div>
+    </div>
+    <div id="chat-container" ondrop="handleDrop(event)" ondragover="event.preventDefault()"></div>
+    <div id="input-container">
+        <textarea id="user-input" placeholder="Type your message... (Shift+Enter for new line)" rows="1"></textarea>
+        <label for="image-upload" id="image-upload-label">📷</label>
+        <input type="file" id="image-upload" accept="image/*">
+        <button id="send-button">Send</button>
+        <button id="clear-button">Clear Chat</button>
+    </div>
+    <div id="api-key-container">
+        <input type="text" id="api-key-input" placeholder="Enter your OpenAI API key">
+        <button id="save-api-key">Save API Key</button>
+    </div>
+    <div id="settings-container">
+        <label class="toggle-container">
+            <input type="checkbox" id="password-toggle">
+            <span class="toggle-label">Password Protection</span>
+        </label>
+    </div>
+    <img id="image-preview" style="display: none;">
+    <div id="loading">Thinking...</div>
+
+    <!-- Move all scripts to the end of body and remove defer -->
+    <script src="https://cors.kbdevs.xyz/https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script src="https://cors.kbdevs.xyz/https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+        marked.setOptions({
+            gfm: true,
+            breaks: true,
+            headerIds: false,
+            highlight: function(code, lang) {
+                if (lang && hljs.getLanguage(lang)) {
+                    try {
+                        return hljs.highlight(code, { language: lang }).value;
+                    } catch (err) {}
+                }
+                return code;
+            }
+        });
+    </script>
+    <script src="aiv3.js"></script>
+</body>
+</html>
